@@ -16,17 +16,15 @@ class JuliaPanel : JPanel() {
     private val cX = -0.7
     private val cY = 0.27015
 
-    public override fun paintComponent(gg: Graphics) {
-        super.paintComponent(gg)
-        with(gg as Graphics2D) {
+    public override fun paintComponent(graphics: Graphics) {
+        super.paintComponent(graphics)
+        with(graphics as Graphics2D) {
             setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
-            val w = width
-            val h = height
-            val image = BufferedImage(w, h, BufferedImage.TYPE_INT_RGB)
-            for (x in 0 until w) {
-                for (y in 0 until h) {
-                    var zx = 1.5 * (x - w / 2) / (0.5 * zoom * w) + moveX
-                    var zy = (y - h / 2) / (0.5 * zoom * h) + moveY
+            val image = BufferedImage(width, height, BufferedImage.TYPE_INT_RGB)
+            for (x in 0 until width) {
+                for (y in 0 until height) {
+                    var zx = 1.5 * (x - width / 2) / (0.5 * zoom * width) + moveX
+                    var zy = (y - height / 2) / (0.5 * zoom * height) + moveY
                     var i = maxIterations.toFloat()
                     while (zx * zx + zy * zy < 4 && i > 0) {
                         val tmp = zx * zx - zy * zy + cX
