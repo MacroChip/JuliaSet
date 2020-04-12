@@ -21,8 +21,8 @@ class JuliaPanel : JPanel() {
         with(graphics as Graphics2D) {
             setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
             val image = BufferedImage(width, height, BufferedImage.TYPE_INT_RGB)
-            for (x in 0 until width) {
-                for (y in 0 until height) {
+            (0 until width).forEach { x ->
+                (0 until height).forEach { y ->
                     var zx = 1.5 * (x - width / 2) / (0.5 * zoom * width) + moveX
                     var zy = (y - height / 2) / (0.5 * zoom * height) + moveY
                     var i = maxIterations.toFloat()
