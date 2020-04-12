@@ -7,8 +7,8 @@ import javax.swing.SwingUtilities
 class JuliaSetTranslated : JPanel() {
     private val maxIter = 300
     private val zoom = 1.0
-    private var cY: Double = 0.toDouble()
-    private var cX: Double = 0.toDouble()
+    private var cY: Double = 0.27015
+    private var cX: Double = -0.7
 
     init {
         preferredSize = Dimension(800, 600)
@@ -23,8 +23,7 @@ class JuliaSetTranslated : JPanel() {
             BufferedImage.TYPE_INT_RGB
         )
 
-        cX = -0.7
-        cY = 0.27015
+
         val moveX = 0.0
         val moveY = 0.0
         var zx: Double
