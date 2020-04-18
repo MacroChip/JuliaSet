@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.stream.IntStream;
 
 public class JuliaSet extends JPanel {
     private static final int MAX_ITERATIONS = 300;
@@ -20,8 +21,8 @@ public class JuliaSet extends JPanel {
         int h = getHeight();
         BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 
-        for (int x = 0; x < w; x++) {
-            for (int y = 0; y < h; y++) {
+        IntStream.range(0, w).parallel().forEach(x -> {
+            IntStream.range(0, h).parallel().forEach(y -> {
                 double zx = 1.5 * (x - w / 2) / (0.5 * ZOOM * w) + MOVE_X;
                 double zy = (y - h / 2) / (0.5 * ZOOM * h) + MOVE_Y;
                 float i = MAX_ITERATIONS;
@@ -33,8 +34,8 @@ public class JuliaSet extends JPanel {
                 }
                 int c = Color.HSBtoRGB((MAX_ITERATIONS / i) % 1, 1, i > 0 ? 1 : 0);
                 image.setRGB(x, y, c);
-            }
-        }
+            });
+        });
         g.drawImage(image, 0, 0, null);
     }
 
