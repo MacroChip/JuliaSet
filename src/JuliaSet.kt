@@ -2,6 +2,7 @@ import java.awt.*
 import java.awt.image.BufferedImage
 import javax.swing.JFrame
 import javax.swing.JPanel
+import kotlin.streams.asStream
 
 class JuliaPanel : JPanel() {
     init {
@@ -21,8 +22,8 @@ class JuliaPanel : JPanel() {
         with(graphics as Graphics2D) {
             setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
             val image = BufferedImage(width, height, BufferedImage.TYPE_INT_RGB)
-            (0 until width).forEach { x ->
-                (0 until height).forEach { y ->
+            (0 until width).asSequence().asStream().parallel().forEach { x ->
+                (0 until height).asSequence().asStream().parallel().forEach { y ->
                     var zx = 1.5 * (x - width / 2) / (0.5 * zoom * width) + moveX
                     var zy = (y - height / 2) / (0.5 * zoom * height) + moveY
                     var i = maxIterations.toFloat()
